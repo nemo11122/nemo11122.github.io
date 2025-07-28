@@ -261,24 +261,25 @@ a {
   padding-top: 10px;
 }
 
-/* 統一 sidebar 清單樣式 */
+/* --- 統一 sidebar 清單樣式：文字齊、點點略突出 --- */
 .sidebar-section ul {
   list-style: disc;
-  list-style-position: outside;   /* ✅ 點點在外側，整齊靠左 */
-  padding-left: 1.2em;            /* ✅ 統一點點和文字距離 */
-  
+  list-style-position: outside;    /* 點點在左邊獨立 */
   margin: 0;
+              /* 控制點點與標題齊 */
 }
 
 .sidebar-section ul li {
   margin: 0 0 0.4em 0;
-  color: #999;                    /* 點點灰色 */
+  padding-left: 0;
+  color: #999;                     /* 點點為灰色 */
 }
 
 .sidebar-section ul li a {
-  color: #007acc;               /* 藍色連結 */
+  color: #007acc;                  /* 藍色連結 */
   text-decoration: underline;
 }
+
 
 /* 🔹 讓 (1) 顯示為灰色、字體小一點 */
 .archive-count {
