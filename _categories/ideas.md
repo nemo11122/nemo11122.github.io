@@ -1,6 +1,5 @@
 ---
 layout: category
-title: "ideas"
-category: ideas
+title: ideas
 permalink: /categories/ideas/
 ---
