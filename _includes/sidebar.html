@@ -40,14 +40,15 @@
   <ul>
     {% assign posts_by_month = site.posts | group_by_exp:"post", "post.date | date: '%B, %Y'" %}
     {% for month in posts_by_month %}
-      <li>
+      <li data-count="({{ month.items | size }})">
         <a href="/archive/#{{ month.name | slugify }}">
-          {{ month.name }} ({{ month.items | size }})
+          {{ month.name }}
         </a>
       </li>
     {% endfor %}
   </ul>
 </div>
+
 
 
 
