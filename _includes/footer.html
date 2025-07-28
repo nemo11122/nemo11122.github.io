@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ 關鍵控制行：顯示結果、隱藏首頁
     homepage.style.display = "none";
     resultSection.style.display = "block";
+    const contentArea = document.querySelector(".page-content");
+  if (contentArea) contentArea.style.display = "none";
 
     resultList.innerHTML = "";
     resultTitle.innerHTML = `Search results for: <mark>${q}</mark>`;
