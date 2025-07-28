@@ -6,9 +6,12 @@
   <div class="sidebar-section">
     <h3 class="section-title">Categories</h3>
     <ul class="categories-list">
-      {% for category in site.categories %}
-        <li><a href="/categories/{{ category[0] | slugify }}">{{ category[0] }}</a></li>
-      {% endfor %}
-    </ul>
+  {% for category in site.categories %}
+    <li>
+      <a href="/categories/{{ category[0] | slugify }}/">{{ category[0] }}</a>
+    </li>
+  {% endfor %}
+</ul>
+
   </div>
 </aside>
