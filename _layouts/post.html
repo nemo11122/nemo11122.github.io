@@ -7,7 +7,7 @@ layout: default
   <h2 class="post-title"><a href="{{ page.url }}">{{ page.title }}</a></h2>
   <div class="post-excerpt">{{ content }}</div>
 
-  {% if page.categories and page.categories.size > 0 %}
+  {% if page.categories and page.categories != 0 and page.categories != empty %}
     <div class="post-meta-footer">
       Categories:
       {% for cat in page.categories %}
@@ -16,3 +16,4 @@ layout: default
     </div>
   {% endif %}
 </article>
+
