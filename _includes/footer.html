@@ -2,75 +2,93 @@
   <p>&copy; 2025 {{ site.title }}. All rights reserved.</p>
 </footer>
 
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const input = document.getElementById("search-input");
+  const sidebarInput = document.getElementById("search-input");
+  const mainInput = document.getElementById("main-search-input");
   const resultSection = document.getElementById("search-result-section");
   const resultTitle = document.getElementById("search-result-title");
   const resultList = document.getElementById("search-results");
 
   let data = [];
 
-  // 預先讀取 search.json
+  // 讀取 search.json
   fetch("/search.json")
     .then(res => res.json())
     .then(json => { data = json; });
 
-  // 綁定 Enter 鍵搜尋
-  input.addEventListener("keydown", function (e) {
+  // 共用搜尋函式
+  function performSearch(keyword) {
+    const q = keyword.trim().toLowerCase();
+    if (!q) return;
+
+    resultList.innerHTML = "";
+    resultSection.style.display = "block";
+    resultTitle.innerHTML = `Search results for: <mark>${q}</mark>`;
+    mainInput.value = keyword;
+
+    const results = data.filter(post =>
+      post.title.toLowerCase().includes(q) ||
+      post.excerpt.toLowerCase().includes(q)
+    );
+
+    if (results.length === 0) {
+      resultList.innerHTML = `
+        <div class="search-not-found">
+          <h2>Nothing Found</h2>
+          <p>Sorry, but nothing matched your search criteria. Please try again with some different keywords.</p>
+        </div>
+      `;
+      return;
+    }
+
+    results.forEach(post => {
+      const container = document.createElement("div");
+      container.className = "post-item";
+
+      const date = document.createElement("div");
+      date.className = "post-date";
+      date.textContent = post.date || "";
+
+      const title = document.createElement("h2");
+      title.className = "post-title";
+      const link = document.createElement("a");
+      link.href = post.url;
+      link.textContent = post.title;
+      title.appendChild(link);
+
+      const excerpt = document.createElement("div");
+      excerpt.className = "post-excerpt";
+      excerpt.textContent = post.excerpt;
+
+      container.appendChild(date);
+      container.appendChild(title);
+      container.appendChild(excerpt);
+      resultList.appendChild(container);
+    });
+  }
+
+  // ⌨️ Sidebar Enter 搜尋
+  sidebarInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
-      const keyword = this.value.trim().toLowerCase();
-      resultList.innerHTML = "";
-      if (!keyword) return;
+      performSearch(this.value);
+    }
+  });
 
-      resultSection.style.display = "block";
-      resultTitle.innerHTML = `Search results for: <mark>${keyword}</mark>`;
-
-      const results = data.filter(post =>
-        post.title.toLowerCase().includes(keyword) ||
-        post.excerpt.toLowerCase().includes(keyword)
-      );
-
-      if (results.length === 0) {
-        resultList.innerHTML = `
-          <div class="search-not-found">
-            <h2>Nothing Found</h2>
-            <p>Sorry, but nothing matched your search criteria. Please try again with some different keywords.</p>
-          </div>
-        `;
-        return;
-      }
-
-      results.forEach(post => {
-        const container = document.createElement("div");
-        container.className = "post-item";
-
-        const date = document.createElement("div");
-        date.className = "post-date";
-        date.textContent = post.date || "";
-
-        const title = document.createElement("h2");
-        title.className = "post-title";
-        const link = document.createElement("a");
-        link.href = post.url;
-        link.textContent = post.title;
-        title.appendChild(link);
-
-        const excerpt = document.createElement("div");
-        excerpt.className = "post-excerpt";
-        excerpt.textContent = post.excerpt;
-
-        container.appendChild(date);
-        container.appendChild(title);
-        container.appendChild(excerpt);
-        resultList.appendChild(container);
-      });
+  // ⌨️ 中間輸入框也能 Enter 搜尋
+  mainInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      performSearch(this.value);
     }
   });
 });
 </script>
+
+
+
+
 
 
 
