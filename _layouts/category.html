@@ -4,21 +4,16 @@ layout: default
 
 <h1>Category: {{ page.title }}</h1>
 
-{% if page.category and page.category != 0 and page.category != empty and page.category != nil %}
-  {% assign cat = page.category | append: "" %}
+<ul>
   {% for pair in site.categories %}
-    {% assign cat_name = pair[0] | append: "" %}
-    {% if cat_name == cat %}
-      <ul>
-        {% for post in pair[1] %}
-          <li>
-            <a href="{{ post.url }}">{{ post.title }}</a>
-            <span style="color:#999;">({{ post.date | date: "%Y-%m-%d" }})</span>
-          </li>
-        {% endfor %}
-      </ul>
+    {% assign key = pair[0] %}
+    {% if key == page.title %}
+      {% for post in pair[1] %}
+        <li>
+          <a href="{{ post.url }}">{{ post.title }}</a>
+          <span style="color:#999;">({{ post.date | date: "%Y-%m-%d" }})</span>
+        </li>
+      {% endfor %}
     {% endif %}
   {% endfor %}
-{% else %}
-  <p>No category matched.</p>
-{% endif %}
+</ul>
