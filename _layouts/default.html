@@ -15,6 +15,38 @@
     {% include sidebar.html %}
   </div>
   {% include footer.html %}
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("search-input");
+  const resultsList = document.getElementById("search-results");
+
+  fetch("/search.json")
+    .then((res) => res.json())
+    .then((data) => {
+      searchInput.addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        resultsList.innerHTML = "";
+
+        if (query.length < 2) return;
+
+        const results = data.filter(post =>
+          post.title.toLowerCase().includes(query) ||
+          post.excerpt.toLowerCase().includes(query)
+        );
+
+        results.forEach(post => {
+          const li = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = post.url;
+          link.textContent = post.title;
+          li.appendChild(link);
+          resultsList.appendChild(li);
+        });
+      });
+    });
+});
+</script>
+
 </body>
 </html>
 
