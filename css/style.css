@@ -180,14 +180,17 @@ a {
 }
 
 /* 🧭 搜尋區：標題樣式 + 底線 */
+
 #search-result-title {
   font-size: 2em;
-  font-weight: 700;
+  font-weight: bold;
   margin-bottom: 20px;
   padding-bottom: 12px;
   border-bottom: 1px solid #ccc;
-  font-family: sans-serif;
+  background: #f9f9f9;
+  padding: 10px 0;
 }
+
 
 /* 搜尋欄與第一張圖片之間加距離 */
 #main-search-input {
