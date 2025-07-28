@@ -7,3 +7,5 @@ theme: null
 collections:
   categories:
     output: true
+
+permalink: /:categories/:title/
