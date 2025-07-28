@@ -9,10 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const resultSection = document.getElementById("search-result-section");
   const resultTitle = document.getElementById("search-result-title");
   const resultList = document.getElementById("search-results");
+  const homepage = document.getElementById("homepage-posts");
 
   let data = [];
 
-  // 載入 search.json
+  // 載入文章資料
   fetch("/search.json")
     .then(res => res.json())
     .then(json => { data = json; });
@@ -21,8 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const q = keyword.trim().toLowerCase();
     if (!q) return;
 
-    resultList.innerHTML = "";
+    // ✅ 關鍵控制行：顯示結果、隱藏首頁
+    homepage.style.display = "none";
     resultSection.style.display = "block";
+
+    resultList.innerHTML = "";
     resultTitle.innerHTML = `Search results for: <mark>${q}</mark>`;
     mainInput.value = keyword;
 
@@ -67,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 🔍 sidebar 輸入後按 Enter
+  // 🔍 Sidebar 輸入按 Enter
   sidebarInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -75,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 🔍 main 搜尋輸入後再 Enter
+  // 🔍 中央搜尋欄按 Enter
   mainInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -84,12 +88,3 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
-
-
-
-
-
-
-
-
-   
