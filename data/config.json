@@ -1,0 +1,7 @@
+{
+  "siteTitle": "nemo.com",
+  "nav": [
+    { "label": "Home", "link": "index.html" },
+    { "label": "About", "link": "#", "action": "openAbout" }
+  ]
+}
