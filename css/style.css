@@ -291,6 +291,46 @@ a {
   margin-left: 4px;
 }
 
+/* 手機排版優化：畫面寬度小於 768px 時 */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 1em;
+  }
+
+  .main-container {
+    flex-direction: column; /* 主欄與 sidebar 垂直排列 */
+  }
+
+  .posts-area,
+  .sidebar-section {
+    width: 100%;
+    padding: 0;
+  }
+
+  .sidebar-section h3 {
+    margin-top: 1.5em;
+  }
+
+  .search-form {
+    width: 100%;
+  }
+
+  .post-item img.post-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .search-input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .search-button {
+    font-size: 1.4em;
+  }
+}
+
 
 
 
