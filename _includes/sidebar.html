@@ -1,16 +1,23 @@
 <aside class="sidebar">
-  <section class="sidebar-section">
-    <h3 class="section-title">About</h3>
-    <p><a href="/about">me</a></p>
-  </section>
+  <div class="search-widget">
+    <form class="search-form" onsubmit="return false;">
+      <input type="text" class="search-input" placeholder="Search...">
+      <button type="submit" class="search-button">🔍</button>
+    </form>
+  </div>
 
-  <section class="sidebar-section">
+  <div class="sidebar-section">
+    <h3 class="section-title">About</h3>
+    <a href="/about" class="about-link">me</a>
+  </div>
+
+  <div class="sidebar-section">
     <h3 class="section-title">Categories</h3>
     <ul class="categories-list">
-      {% assign all_categories = site.posts | map: "categories" | join: "," | split: "," | uniq | sort %}
-      {% for cat in all_categories %}
+      {% assign cats = site.posts | map: "categories" | join: "," | split: "," | uniq | sort %}
+      {% for cat in cats %}
         <li><a href="/categories/{{ cat | slugify }}/">{{ cat }}</a></li>
       {% endfor %}
     </ul>
-  </section>
+  </div>
 </aside>
