@@ -1,0 +1,32 @@
+<!-- 🔍 搜尋結果區塊（預設隱藏） -->
+<div id="search-result-section" style="display:none;">
+  <h2 id="search-result-title"></h2>
+  <input type="text" id="main-search-input" class="search-input" placeholder="Search again...">
+  <div id="search-results"></div>
+</div>
+
+<!-- 📰 首頁文章列表 -->
+<div id="homepage-posts">
+  {% for post in site.posts %}
+    <article class="post-item">
+      {% if post.image %}
+        <img src="{{ post.image }}" alt="Post image" class="post-image" />
+      {% endif %}
+      <div class="post-date">{{ post.date | date: "%B %d, %Y" | upcase }}</div>
+      <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <div class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 40 }}</div>
+      <a href="{{ post.url }}" class="read-more">Continue reading →</a>
+
+      {% if post.author %}
+        <p style="font-size: 0.9em; color: #999;">Written by <strong>{{ post.author }}</strong></p>
+      {% endif %}
+
+      <div class="post-meta-footer">
+        Posted in
+        {% for cat in post.categories %}
+          <a href="/categories/{{ cat | slugify }}/">{{ cat }}</a>{% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      </div>
+    </article>
+  {% endfor %}
+</div>
