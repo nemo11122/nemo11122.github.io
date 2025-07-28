@@ -280,6 +280,40 @@ a {
   text-decoration: underline;
 }
 
+.search-form {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0 0.5em;
+  background: white;
+  width: 100%;
+  max-width: 300px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  padding: 0.6em;
+  font-size: 1em;
+  flex: 1;
+  background: transparent;
+}
+
+.search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  color: #000; /* 黑色 icon */
+}
+
+
 
 /* 🔹 讓 (1) 顯示為灰色、字體小一點 */
 .archive-count {
