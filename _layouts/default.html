@@ -8,49 +8,122 @@
 </head>
 <body>
   {% include header.html %}
+
   <div class="main-container">
     <main class="posts-area">
-      {{ content }}
-      <main class="posts-area">
-        {% include search-block.html %}
-      </main>
+      <!-- 🔹 包住頁面原始內容（可在搜尋時隱藏） -->
+      <div id="page-content">
+        {{ content }}
+      </div>
 
+      <!-- 🔹 搜尋結果 + 首頁文章區塊 -->
+      {% include search-block.html %}
     </main>
+
     {% include sidebar.html %}
   </div>
+
   {% include footer.html %}
+
   <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const searchInput = document.getElementById("search-input");
-  const resultsList = document.getElementById("search-results");
+    document.addEventListener("DOMContentLoaded", function () {
+      const sidebarInput = document.getElementById("search-input");
+      const mainInput = document.getElementById("main-search-input");
+      const resultSection = document.getElementById("search-result-section");
+      const resultTitle = document.getElementById("search-result-title");
+      const resultList = document.getElementById("search-results");
+      const homepage = document.getElementById("homepage-posts");
+      const contentArea = document.getElementById("page-content");
 
-  fetch("/search.json")
-    .then((res) => res.json())
-    .then((data) => {
-      searchInput.addEventListener("input", function () {
-        const query = this.value.toLowerCase();
-        resultsList.innerHTML = "";
+      let data = [];
 
-        if (query.length < 2) return;
+      // 載入搜尋資料
+      fetch("/search.json")
+        .then(res => res.json())
+        .then(json => { data = json; });
+
+      function performSearch(keyword) {
+        const q = keyword.trim().toLowerCase();
+        if (!q) return;
+
+        if (homepage) homepage.style.display = "none";
+        if (contentArea) contentArea.style.display = "none";
+        if (resultSection) resultSection.style.display = "block";
+
+        resultList.innerHTML = "";
+        resultTitle.innerHTML = `Search results for: <mark>${q}</mark>`;
+        if (mainInput) mainInput.value = keyword;
 
         const results = data.filter(post =>
-          post.title.toLowerCase().includes(query) ||
-          post.excerpt.toLowerCase().includes(query)
+          post.title.toLowerCase().includes(q) ||
+          post.excerpt.toLowerCase().includes(q)
         );
 
+        if (results.length === 0) {
+          resultList.innerHTML = `
+            <div class="search-not-found">
+              <h2>Nothing Found</h2>
+              <p>Sorry, but nothing matched your search criteria. Please try again with some different keywords.</p>
+            </div>
+          `;
+          return;
+        }
+
         results.forEach(post => {
-          const li = document.createElement("li");
+          const container = document.createElement("div");
+          container.className = "post-item";
+
+          if (post.image) {
+            const img = document.createElement("img");
+            img.src = post.image;
+            img.className = "post-image";
+            container.appendChild(img);
+          }
+
+          const date = document.createElement("div");
+          date.className = "post-date";
+          date.textContent = post.date || "";
+
+          const title = document.createElement("h2");
+          title.className = "post-title";
           const link = document.createElement("a");
           link.href = post.url;
           link.textContent = post.title;
-          li.appendChild(link);
-          resultsList.appendChild(li);
-        });
-      });
-    });
-});
-</script>
+          title.appendChild(link);
 
+          const excerpt = document.createElement("div");
+          excerpt.className = "post-excerpt";
+          excerpt.textContent = post.excerpt;
+
+          container.appendChild(date);
+          container.appendChild(title);
+          container.appendChild(excerpt);
+          resultList.appendChild(container);
+        });
+      }
+
+      // 🔎 Sidebar 搜尋觸發
+      if (sidebarInput) {
+        sidebarInput.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            performSearch(this.value);
+          }
+        });
+      }
+
+      // 🔎 主搜尋框觸發
+      if (mainInput) {
+        mainInput.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            performSearch(this.value);
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
+
 
