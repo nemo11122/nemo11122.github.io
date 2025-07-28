@@ -261,18 +261,22 @@ a {
   padding-top: 10px;
 }
 
-/* 🔹 統一 sidebar 點點為灰色 */
+/* 統一 sidebar 清單樣式 */
+.sidebar-section ul {
+  list-style: disc;
+  list-style-position: outside;   /* ✅ 點點在外側，整齊靠左 */
+  padding-left: 1.2em;            /* ✅ 統一點點和文字距離 */
+  
+  margin: 0;
+}
+
 .sidebar-section ul li {
-  color: #999;
+  margin: 0 0 0.4em 0;
+  color: #999;                    /* 點點灰色 */
 }
 
-/* 🔹 連結保留藍色 */
 .sidebar-section ul li a {
-  color: #007acc;
-  text-decoration: underline;
-}
-
-.sidebar-section ul li a:hover {
+  color: #007acc;               /* 藍色連結 */
   text-decoration: underline;
 }
 
