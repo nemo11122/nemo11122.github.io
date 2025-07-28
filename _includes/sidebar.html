@@ -1,0 +1,16 @@
+<aside class="sidebar">
+  <section class="sidebar-section">
+    <h3 class="section-title">ABOUT</h3>
+    <p><a href="/about">me</a></p>
+  </section>
+
+  <section class="sidebar-section">
+    <h3 class="section-title">CATEGORIES</h3>
+    <ul class="categories-list">
+      {% assign all_categories = site.posts | map: "categories" | join: "," | split: "," | uniq | sort %}
+      {% for cat in all_categories %}
+        <li><a href="/categories/{{ cat | slugify }}/">{{ cat }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+</aside>
