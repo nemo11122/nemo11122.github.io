@@ -5,15 +5,13 @@ layout: default
 <h1>Category: {{ page.title }}</h1>
 
 <ul>
-  {% for pair in site.categories %}
-    {% assign key = pair[0] %}
-    {% if key == page.title %}
-      {% for post in pair[1] %}
-        <li>
-          <a href="{{ post.url }}">{{ post.title }}</a>
-          <span style="color:#999;">({{ post.date | date: "%Y-%m-%d" }})</span>
-        </li>
-      {% endfor %}
+  {% assign current_category = page.title %}
+  {% for post in site.posts %}
+    {% if post.categories contains current_category %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+        <span style="color: #999;">({{ post.date | date: "%Y-%m-%d" }})</span>
+      </li>
     {% endif %}
   {% endfor %}
 </ul>
