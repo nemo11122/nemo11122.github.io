@@ -1,3 +1,60 @@
 <footer class="footer">
   <p>&copy; 2025 {{ site.title }}. All rights reserved.</p>
 </footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("search-input");
+  const resultsList = document.getElementById("search-results");
+
+  fetch("/search.json")
+    .then((res) => res.json())
+    .then((data) => {
+      searchInput.addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        resultsList.innerHTML = "";
+
+        if (query.length < 2) return;
+
+        const results = data.filter(post =>
+          post.title.toLowerCase().includes(query) ||
+          post.excerpt.toLowerCase().includes(query)
+        );
+
+        if (results.length === 0) {
+          const notFoundBlock = document.createElement("div");
+          notFoundBlock.innerHTML = `
+            <h2 style="margin-top: 30px;">Nothing Found</h2>
+            <p>Sorry, but nothing matched your search criteria. Please try again with some different keywords.</p>
+          `;
+          resultsList.appendChild(notFoundBlock);
+          return;
+        }
+
+        results.forEach(post => {
+          const container = document.createElement("div");
+          container.className = "post-item";
+
+          const date = document.createElement("div");
+          date.className = "post-date";
+          date.textContent = post.date || "";
+
+          const title = document.createElement("h2");
+          title.className = "post-title";
+          const link = document.createElement("a");
+          link.href = post.url;
+          link.textContent = post.title;
+          title.appendChild(link);
+
+          const excerpt = document.createElement("div");
+          excerpt.className = "post-excerpt";
+          excerpt.textContent = post.excerpt;
+
+          container.appendChild(date);
+          container.appendChild(title);
+          container.appendChild(excerpt);
+          resultsList.appendChild(container);
+        });
+      });
+    });
+});
+</script>
