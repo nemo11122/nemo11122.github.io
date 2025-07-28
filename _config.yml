@@ -3,6 +3,7 @@ baseurl: ""
 url: "https://nemo11122.github.io"
 markdown: kramdown
 theme: null
+
 collections:
   categories:
     output: true
