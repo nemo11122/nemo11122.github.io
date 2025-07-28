@@ -7,23 +7,13 @@
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <h1 class="site-title"><a href="/">{{ site.title }}</a></h1>
-    <nav class="nav-menu">
-      {% assign all_categories = site.posts | map: "categories" | join: "," | split: "," | uniq | sort %}
-      {% for cat in all_categories %}
-        <a class="nav-button" href="/categories/{{ cat | slugify }}/">{{ cat }}</a>
-      {% endfor %}
-    </nav>
-  </header>
-
+  {% include header.html %}
   <div class="main-container">
-    <main class="content">
+    <main class="posts-area">
       {{ content }}
     </main>
     {% include sidebar.html %}
   </div>
-
   {% include footer.html %}
 </body>
 </html>
