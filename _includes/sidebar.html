@@ -9,10 +9,10 @@
   <div class="sidebar-section">
     <h3 class="section-title">Categories</h3>
 
-    {% if site.categories and site.categories != empty %}
+    {% assign cat_keys = site.categories | map: "first" %}
+    {% if cat_keys and cat_keys != empty %}
       <ul class="categories-list">
-        {% for category in site.categories %}
-          {% assign name = category[0] %}
+        {% for name in cat_keys %}
           <li>
             <a href="/categories/{{ name | slugify }}/">{{ name }}</a>
           </li>
@@ -24,3 +24,4 @@
 
   </div>
 </aside>
+
