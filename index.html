@@ -3,14 +3,24 @@ layout: default
 title: Home
 ---
 
-<h1>All Posts</h1>
-
 {% for post in site.posts %}
-  <div class="post-preview">
+  <article class="post-item">
+    {% if post.image %}
+      <img src="{{ post.image }}" alt="Post image" class="post-image">
+    {% endif %}
     <div class="post-date">{{ post.date | date: "%B %d, %Y" | upcase }}</div>
-    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-    <div class="excerpt">
+    <h2 class="post-title">
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </h2>
+    <div class="post-excerpt">
       {{ post.excerpt | strip_html | truncatewords: 40 }}
     </div>
-  </div>
+    <a href="{{ post.url }}" class="read-more">Continue reading →</a>
+    <div class="post-meta-footer">
+      Posted in
+      {% for cat in post.categories %}
+        <a href="/categories/{{ cat | slugify }}/">{{ cat }}</a>{% unless forloop.last %}, {% endunless %}
+      {% endfor %}
+    </div>
+  </article>
 {% endfor %}
