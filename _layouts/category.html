@@ -4,8 +4,8 @@ layout: default
 
 <h1>Category: {{ page.title }}</h1>
 
-{% assign this_category = page.category %}
-{% if this_category and site.categories[this_category] %}
+{% assign this_category = page.category | to_s %}
+{% if site.categories[this_category] %}
   <ul>
     {% for post in site.categories[this_category] %}
       <li>
