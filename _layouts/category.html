@@ -4,16 +4,18 @@ layout: default
 
 <h1>Category: {{ page.title }}</h1>
 
-{% assign this_category = page.category | to_s %}
-{% if site.categories[this_category] %}
-  <ul>
-    {% for post in site.categories[this_category] %}
-      <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-        <span style="color:#999;">({{ post.date | date: "%Y-%m-%d" }})</span>
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>No posts found in this category.</p>
-{% endif %}
+{% assign cat = page.category | downcase %}
+
+{% for pair in site.categories %}
+  {% assign name = pair[0] | downcase %}
+  {% if name == cat %}
+    <ul>
+      {% for post in pair[1] %}
+        <li>
+          <a href="{{ post.url }}">{{ post.title }}</a>
+          <span style="color:#999;">({{ post.date | date: "%Y-%m-%d" }})</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endfor %}
