@@ -8,7 +8,9 @@ layout: null
       "url": {{ post.url | absolute_url | jsonify }},
       "excerpt": {{ post.excerpt | strip_html | truncatewords: 30 | jsonify }},
       "date": "{{ post.date | date: '%B %d, %Y' }}",
-  "image": {{ post.image | jsonify }}
+      "image": {{ post.image | jsonify }},
+      "author": {{ post.author | jsonify }},
+      "categories": {{ post.categories | jsonify }}
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
