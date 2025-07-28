@@ -1,9 +1,13 @@
-<header>
-  <h1><a href="/">{{ site.title }}</a></h1>
-  <nav>
-    <a href="/">Home</a> |
-    <a href="/about">About</a> |
-    <a href="/categories">Categories</a>
-  </nav>
+<header class="header">
+  <div class="header-container">
+    <h1><a href="/" class="site-title">{{ site.title }}</a></h1>
+    <nav class="nav-menu">
+      <div class="nav-buttons">
+        {% assign cats = site.posts | map: "categories" | join: "," | split: "," | uniq | sort %}
+        {% for cat in cats %}
+          <a class="nav-button" href="/categories/{{ cat | slugify }}/">{{ cat }}</a>
+        {% endfor %}
+      </div>
+    </nav>
+  </div>
 </header>
-
