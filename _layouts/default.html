@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>{{ page.title }} | {{ site.title }}</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
   <header class="site-header">
     <h1 class="site-title"><a href="/">{{ site.title }}</a></h1>
     <nav class="nav-menu">
-      {% assign categories = site.posts | map: "categories" | join: "," | split: "," | uniq | sort %}
-      {% for cat in categories %}
+      {% assign all_categories = site.posts | map: "categories" | join: "," | split: "," | uniq | sort %}
+      {% for cat in all_categories %}
         <a class="nav-button" href="/categories/{{ cat | slugify }}/">{{ cat }}</a>
       {% endfor %}
     </nav>
@@ -26,3 +27,4 @@
   {% include footer.html %}
 </body>
 </html>
+
