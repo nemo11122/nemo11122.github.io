@@ -1,60 +1,75 @@
 <footer class="footer">
   <p>&copy; 2025 {{ site.title }}. All rights reserved.</p>
 </footer>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const searchInput = document.getElementById("search-input");
-  const resultsList = document.getElementById("search-results");
+  const headerInput = document.getElementById("header-search-input");
+  const form = document.getElementById("site-search-form");
+  const mainInput = document.getElementById("main-search-input");
+  const resultsBox = document.getElementById("search-results");
+  const mainSection = document.getElementById("main-search-results");
+  const titleDisplay = document.getElementById("main-search-title");
+
+  let data = [];
 
   fetch("/search.json")
-    .then((res) => res.json())
-    .then((data) => {
-      searchInput.addEventListener("input", function () {
-        const query = this.value.toLowerCase();
-        resultsList.innerHTML = "";
+    .then(res => res.json())
+    .then(json => { data = json; });
 
-        if (query.length < 2) return;
+  // 👉 當按下 Enter 觸發搜尋
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const keyword = headerInput.value.trim();
+    if (keyword.length < 1) return;
 
-        const results = data.filter(post =>
-          post.title.toLowerCase().includes(query) ||
-          post.excerpt.toLowerCase().includes(query)
-        );
+    // 顯示中央搜尋區塊
+    mainSection.style.display = "block";
+    mainInput.value = keyword;
+    titleDisplay.innerHTML = `Search results for: <mark>${keyword}</mark>`;
+    resultsBox.innerHTML = "";
 
-        if (results.length === 0) {
-          const notFoundBlock = document.createElement("div");
-          notFoundBlock.innerHTML = `
-            <h2 style="margin-top: 30px;">Nothing Found</h2>
-            <p>Sorry, but nothing matched your search criteria. Please try again with some different keywords.</p>
-          `;
-          resultsList.appendChild(notFoundBlock);
-          return;
-        }
+    const results = data.filter(post =>
+      post.title.toLowerCase().includes(keyword.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(keyword.toLowerCase())
+    );
 
-        results.forEach(post => {
-          const container = document.createElement("div");
-          container.className = "post-item";
+    if (results.length === 0) {
+      resultsBox.innerHTML = `
+        <div class="search-not-found">
+          <h2>Nothing Found</h2>
+          <p>Sorry, but nothing matched your search criteria. Please try again with some different keywords.</p>
+        </div>
+      `;
+      return;
+    }
 
-          const date = document.createElement("div");
-          date.className = "post-date";
-          date.textContent = post.date || "";
+    results.forEach(post => {
+      const container = document.createElement("div");
+      container.className = "post-item";
 
-          const title = document.createElement("h2");
-          title.className = "post-title";
-          const link = document.createElement("a");
-          link.href = post.url;
-          link.textContent = post.title;
-          title.appendChild(link);
+      const date = document.createElement("div");
+      date.className = "post-date";
+      date.textContent = post.date || "";
 
-          const excerpt = document.createElement("div");
-          excerpt.className = "post-excerpt";
-          excerpt.textContent = post.excerpt;
+      const title = document.createElement("h2");
+      title.className = "post-title";
+      const link = document.createElement("a");
+      link.href = post.url;
+      link.textContent = post.title;
+      title.appendChild(link);
 
-          container.appendChild(date);
-          container.appendChild(title);
-          container.appendChild(excerpt);
-          resultsList.appendChild(container);
-        });
-      });
+      const excerpt = document.createElement("div");
+      excerpt.className = "post-excerpt";
+      excerpt.textContent = post.excerpt;
+
+      container.appendChild(date);
+      container.appendChild(title);
+      container.appendChild(excerpt);
+      resultsBox.appendChild(container);
     });
+  });
 });
 </script>
+
+   
