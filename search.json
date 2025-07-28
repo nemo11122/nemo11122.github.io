@@ -7,6 +7,7 @@ layout: null
       "title": {{ post.title | jsonify }},
       "url": {{ post.url | absolute_url | jsonify }},
       "excerpt": {{ post.excerpt | strip_html | truncatewords: 30 | jsonify }},
+      "content": {{ post.content | strip_html | jsonify }},
       "date": "{{ post.date | date: '%B %d, %Y' }}",
       "image": {{ post.image | jsonify }},
       "author": {{ post.author | jsonify }},
@@ -14,4 +15,3 @@ layout: null
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
-
