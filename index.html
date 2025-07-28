@@ -4,6 +4,9 @@ title: Home
 ---
 
 {% for post in site.posts %}
+{% if post.author %}
+  <p style="font-size: 0.9em; color: #999;">Written by <strong>{{ post.author }}</strong></p>
+{% endif %}
   <article class="post-item">
     {% if post.image %}
       <img src="{{ post.image }}" alt="Post image" class="post-image" />
