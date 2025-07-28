@@ -261,15 +261,14 @@ a {
   padding-top: 10px;
 }
 
-/* Archives list bullet & count styling */
+/* 🔹 統一 sidebar 點點為灰色 */
 .sidebar-section ul li {
-  list-style-type: disc;
-  color: #999; /* 這是灰色的點點 */
-  margin-left: 1.2em;
+  color: #999;
 }
 
+/* 🔹 連結保留藍色 */
 .sidebar-section ul li a {
-  color: #007acc; /* 保持連結藍色 */
+  color: #007acc;
   text-decoration: none;
 }
 
@@ -277,9 +276,8 @@ a {
   text-decoration: underline;
 }
 
-/* 灰色的數字（括號內文章數） */
-.sidebar-section ul li::after {
-  content: attr(data-count);
+/* 🔹 讓 (1) 顯示為灰色、字體小一點 */
+.archive-count {
   color: #999;
   font-size: 0.9em;
   margin-left: 4px;
