@@ -1,6 +1,5 @@
 ---
 layout: category
-title: "hardware"
-category: hardware
+title: hardware
 permalink: /categories/hardware/
 ---
