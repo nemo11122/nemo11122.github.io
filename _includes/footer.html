@@ -48,6 +48,12 @@ document.addEventListener("DOMContentLoaded", function () {
     results.forEach(post => {
       const container = document.createElement("div");
       container.className = "post-item";
+        if (post.image) {
+    const img = document.createElement("img");
+    img.src = post.image;
+    img.className = "post-image";
+    container.appendChild(img);
+  }
 
       const date = document.createElement("div");
       date.className = "post-date";
