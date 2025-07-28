@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ site.title }}</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    {% include header.html %}
+    <div class="main-container">
+      <main class="posts-area">
+        {{ content }}
+      </main>
+      {% include sidebar.html %}
+    </div>
+    {% include footer.html %}
+  </body>
+</html>
