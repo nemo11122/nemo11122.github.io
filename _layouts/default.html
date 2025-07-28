@@ -27,21 +27,23 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const sidebarInput = document.getElementById("search-input");
-      const mainInput = document.getElementById("main-search-input");
-      const resultSection = document.getElementById("search-result-section");
-      const resultTitle = document.getElementById("search-result-title");
-      const resultList = document.getElementById("search-results");
-      const homepage = document.getElementById("homepage-posts");
-      const contentArea = document.getElementById("page-content");
+  const sidebarInput = document.getElementById("search-input");
+  const mainInput = document.getElementById("main-search-input");
+  const resultSection = document.getElementById("search-result-section");
+  const resultTitle = document.getElementById("search-result-title");
+  const resultList = document.getElementById("search-results");
+  const homepage = document.getElementById("homepage-posts");
+  const contentArea = document.getElementById("page-content");
 
-      let data = [];
+  let data = [];
 
-      // 載入搜尋資料
-      fetch("/search.json")
-        .then(res => res.json())
-        .then(json => { data = json; });
+  // 先載入資料，再初始化搜尋邏輯
+  fetch("/search.json")
+    .then(res => res.json())
+    .then(json => {
+      data = json;
 
+      // ✅ 在這裡定義搜尋函數（保證 data 有內容）
       function performSearch(keyword) {
         const q = keyword.trim().toLowerCase();
         if (!q) return;
@@ -63,80 +65,71 @@
           resultList.innerHTML = `
             <div class="search-not-found">
               <h2>Nothing Found</h2>
-              <p>Sorry, but nothing matched your search criteria. Please try again with some different keywords.</p>
-            </div>
-          `;
+              <p>Sorry, but nothing matched your search criteria.</p>
+            </div>`;
           return;
         }
 
         results.forEach(post => {
-  const container = document.createElement("div");
-  container.className = "post-item";
+          const container = document.createElement("div");
+          container.className = "post-item";
 
-  // 圖片
-  if (post.image) {
-    const img = document.createElement("img");
-    img.src = post.image;
-    img.className = "post-image";
-    container.appendChild(img);
-  }
+          if (post.image) {
+            const img = document.createElement("img");
+            img.src = post.image;
+            img.className = "post-image";
+            container.appendChild(img);
+          }
 
-  // 日期
-  const date = document.createElement("div");
-  date.className = "post-date";
-  date.textContent = post.date || "";
-  container.appendChild(date);
+          const date = document.createElement("div");
+          date.className = "post-date";
+          date.textContent = post.date || "";
+          container.appendChild(date);
 
-  // 標題
-  const title = document.createElement("h2");
-  title.className = "post-title";
-  const link = document.createElement("a");
-  link.href = post.url;
-  link.textContent = post.title;
-  title.appendChild(link);
-  container.appendChild(title);
+          const title = document.createElement("h2");
+          title.className = "post-title";
+          const link = document.createElement("a");
+          link.href = post.url;
+          link.textContent = post.title;
+          title.appendChild(link);
+          container.appendChild(title);
 
-  // 摘要
-  const excerpt = document.createElement("div");
-  excerpt.className = "post-excerpt";
-  excerpt.textContent = post.excerpt;
-  container.appendChild(excerpt);
+          const excerpt = document.createElement("div");
+          excerpt.className = "post-excerpt";
+          excerpt.textContent = post.excerpt;
+          container.appendChild(excerpt);
 
-  // Continue reading →
-  const readMore = document.createElement("a");
-  readMore.href = post.url;
-  readMore.textContent = "Continue reading →";
-  readMore.className = "read-more";
-  container.appendChild(readMore);
+          const readMore = document.createElement("a");
+          readMore.href = post.url;
+          readMore.textContent = "Continue reading →";
+          readMore.className = "read-more";
+          container.appendChild(readMore);
 
-  // 作者
-  if (post.author) {
-    const author = document.createElement("p");
-    author.innerHTML = 'Written by <strong>' + post.author + '</strong>';
-    author.style.fontSize = "0.9em";
-    author.style.color = "#999";
-    container.appendChild(author);
-  }
+          if (post.author) {
+            const author = document.createElement("p");
+            author.innerHTML = 'Written by <strong>' + post.author + '</strong>';
+            author.style.fontSize = "0.9em";
+            author.style.color = "#999";
+            container.appendChild(author);
+          }
 
-  // 類別
-  if (post.categories && post.categories.length > 0) {
-    const metaFooter = document.createElement("div");
-    metaFooter.className = "post-meta-footer";
-    metaFooter.innerHTML = "Posted in " + post.categories.map(cat => {
-      return `<a href="/categories/${cat.toLowerCase()}">${cat}</a>`;
-    }).join(", ");
-    container.appendChild(metaFooter);
-  }
+          if (post.categories && post.categories.length > 0) {
+            const metaFooter = document.createElement("div");
+            metaFooter.className = "post-meta-footer";
+            metaFooter.innerHTML = "Posted in " + post.categories.map(cat => {
+              return `<a href="/categories/${cat.toLowerCase()}">${cat}</a>`;
+            }).join(", ");
+            container.appendChild(metaFooter);
+          }
 
-  // 分隔線
-  const hr = document.createElement("hr");
-  container.appendChild(hr);
+          const hr = document.createElement("hr");
+          container.appendChild(hr);
 
-  resultList.appendChild(container);
-});
+          resultList.appendChild(container);
+        });
+      }
 
-
-      // 🔎 Sidebar 搜尋觸發
+      // ✅ 等載入完後才綁定事件
       if (sidebarInput) {
         sidebarInput.addEventListener("keydown", function (e) {
           if (e.key === "Enter") {
@@ -146,7 +139,6 @@
         });
       }
 
-      // 🔎 主搜尋框觸發
       if (mainInput) {
         mainInput.addEventListener("keydown", function (e) {
           if (e.key === "Enter") {
@@ -155,7 +147,17 @@
           }
         });
       }
+
+      // ✅ 支援網址 query 觸發搜尋
+      const urlParams = new URLSearchParams(window.location.search);
+      const autoQuery = urlParams.get("query");
+      if (autoQuery) {
+        if (sidebarInput) sidebarInput.value = autoQuery;
+        performSearch(autoQuery);
+      }
     });
+});
+
   </script>
 </body>
 </html>
