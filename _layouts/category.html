@@ -2,12 +2,10 @@
 layout: default
 ---
 
-<h1>Category: {{ page.title }}</h1>
-
+<h1>Posts in Category: {{ page.category }}</h1>
 <ul class="post-list">
-  {% assign cat = page.category %}
   {% for post in site.posts %}
-    {% if post.categories contains cat %}
+    {% if post.categories contains page.category %}
       <li class="post-item">
         {% if post.image %}
           <img src="{{ post.image }}" alt="Post image" class="post-image" />
@@ -17,7 +15,7 @@ layout: default
           <a href="{{ post.url }}">{{ post.title }}</a>
         </h2>
         <div class="post-excerpt">
-          {{ post.excerpt | strip_html | truncatewords: 40 }}
+          {{ post.excerpt | strip_html | truncatewords: 30 }}
         </div>
       </li>
     {% endif %}
