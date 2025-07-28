@@ -399,13 +399,68 @@ body {
   font-size: 14px;
 }
 
-#main-search-input {
-  padding: 10px 12px;
-  border: 1px solid #999;
-  border-radius: 6px;
+/* 👉 sidebar 和中間的搜尋欄統一樣式 */
+.search-input {
   width: 100%;
-  max-width: 500px;
-  font-size: 16px;
+  padding: 10px 12px;
+  font-size: 1em;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  box-shadow: none;
+  font-family: sans-serif;
+}
+
+/* 👉 搜尋結果區塊的標題與 mark */
+#search-result-section h2 {
+  font-size: 1.6em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  font-family: sans-serif;
+}
+
+#search-result-title mark {
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  padding: 2px 4px;
+  font-family: monospace;
+}
+
+/* 👉 統一搜尋結果文章排版（左欄主內容） */
+#search-results .post-item {
+  margin-bottom: 60px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ddd;
+}
+
+#search-results .post-title {
+  font-size: 1.7em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#search-results .post-title a {
+  color: #000;
+  text-decoration: none;
+}
+
+#search-results .post-date {
+  font-size: 0.85em;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+#search-results .post-excerpt {
+  font-size: 1.05em;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* 👉 沒有結果時樣式 */
+.search-not-found {
+  margin-top: 30px;
 }
 
 .search-not-found h2 {
@@ -420,5 +475,6 @@ body {
   max-width: 600px;
   line-height: 1.6;
 }
+
 
 }
