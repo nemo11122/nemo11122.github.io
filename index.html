@@ -3,8 +3,8 @@ layout: default
 title: Home
 ---
 
+<!-- 首頁文章清單 -->
 {% for post in site.posts %}
-
   <article class="post-item">
     {% if post.image %}
       <img src="{{ post.image }}" alt="Post image" class="post-image" />
@@ -13,10 +13,12 @@ title: Home
     <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
     <div class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 40 }}</div>
     <a href="{{ post.url }}" class="read-more">Continue reading →</a>
+
+    {% if post.author %}
+      <p style="font-size: 0.9em; color: #999;">Written by <strong>{{ post.author }}</strong></p>
+    {% endif %}
+
     <div class="post-meta-footer">
-      {% if post.author %}
-  <p style="font-size: 0.9em; color: #999;">Written by <strong>{{ post.author }}</strong></p>
-{% endif %}
       Posted in
       {% for cat in post.categories %}
         <a href="/categories/{{ cat | slugify }}/">{{ cat }}</a>{% unless forloop.last %}, {% endunless %}
@@ -24,4 +26,12 @@ title: Home
     </div>
   </article>
 {% endfor %}
+
+<!-- 🔍 搜尋結果顯示區塊 -->
+<div id="search-result-section" style="display:none; padding: 30px 0;">
+  <h2 id="search-result-title"></h2>
+  <input type="text" id="main-search-input" class="search-input" placeholder="Search again...">
+  <div id="search-results"></div>
+</div>
+
 
