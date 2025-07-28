@@ -70,37 +70,71 @@
         }
 
         results.forEach(post => {
-          const container = document.createElement("div");
-          container.className = "post-item";
+  const container = document.createElement("div");
+  container.className = "post-item";
 
-          if (post.image) {
-            const img = document.createElement("img");
-            img.src = post.image;
-            img.className = "post-image";
-            container.appendChild(img);
-          }
+  // 圖片
+  if (post.image) {
+    const img = document.createElement("img");
+    img.src = post.image;
+    img.className = "post-image";
+    container.appendChild(img);
+  }
 
-          const date = document.createElement("div");
-          date.className = "post-date";
-          date.textContent = post.date || "";
+  // 日期
+  const date = document.createElement("div");
+  date.className = "post-date";
+  date.textContent = post.date || "";
+  container.appendChild(date);
 
-          const title = document.createElement("h2");
-          title.className = "post-title";
-          const link = document.createElement("a");
-          link.href = post.url;
-          link.textContent = post.title;
-          title.appendChild(link);
+  // 標題
+  const title = document.createElement("h2");
+  title.className = "post-title";
+  const link = document.createElement("a");
+  link.href = post.url;
+  link.textContent = post.title;
+  title.appendChild(link);
+  container.appendChild(title);
 
-          const excerpt = document.createElement("div");
-          excerpt.className = "post-excerpt";
-          excerpt.textContent = post.excerpt;
+  // 摘要
+  const excerpt = document.createElement("div");
+  excerpt.className = "post-excerpt";
+  excerpt.textContent = post.excerpt;
+  container.appendChild(excerpt);
 
-          container.appendChild(date);
-          container.appendChild(title);
-          container.appendChild(excerpt);
-          resultList.appendChild(container);
-        });
-      }
+  // Continue reading →
+  const readMore = document.createElement("a");
+  readMore.href = post.url;
+  readMore.textContent = "Continue reading →";
+  readMore.className = "read-more";
+  container.appendChild(readMore);
+
+  // 作者
+  if (post.author) {
+    const author = document.createElement("p");
+    author.innerHTML = 'Written by <strong>' + post.author + '</strong>';
+    author.style.fontSize = "0.9em";
+    author.style.color = "#999";
+    container.appendChild(author);
+  }
+
+  // 類別
+  if (post.categories && post.categories.length > 0) {
+    const metaFooter = document.createElement("div");
+    metaFooter.className = "post-meta-footer";
+    metaFooter.innerHTML = "Posted in " + post.categories.map(cat => {
+      return `<a href="/categories/${cat.toLowerCase()}">${cat}</a>`;
+    }).join(", ");
+    container.appendChild(metaFooter);
+  }
+
+  // 分隔線
+  const hr = document.createElement("hr");
+  container.appendChild(hr);
+
+  resultList.appendChild(container);
+});
+
 
       // 🔎 Sidebar 搜尋觸發
       if (sidebarInput) {
