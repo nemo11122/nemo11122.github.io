@@ -4,8 +4,9 @@ title: Categories
 ---
 
 <h1>All Categories</h1>
-<ul class="categories-list">
-  {% for category in site.categories %}
-    <li><a href="/categories/{{ category[0] | slugify }}">{{ category[0] }} ({{ category[1].size }})</a></li>
+{% assign all_categories = site.posts | map: "categories" | join: "," | split: "," | uniq | sort %}
+<ul>
+  {% for cat in all_categories %}
+    <li><a href="/categories/{{ cat | slugify }}/">{{ cat }}</a></li>
   {% endfor %}
 </ul>
