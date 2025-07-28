@@ -291,7 +291,7 @@ a {
   margin-left: 4px;
 }
 
-/* 手機排版優化：畫面寬度小於 768px 時 */
+/* === 響應式設計 for 手機（畫面寬度小於 768px）=== */
 @media screen and (max-width: 768px) {
   body {
     font-size: 16px;
@@ -299,7 +299,9 @@ a {
   }
 
   .main-container {
-    flex-direction: column; /* 主欄與 sidebar 垂直排列 */
+    display: flex;
+    flex-direction: column; /* 👉 sidebar 改往下排 */
+    gap: 1.5em;
   }
 
   .posts-area,
@@ -310,24 +312,41 @@ a {
 
   .sidebar-section h3 {
     margin-top: 1.5em;
+    font-size: 1.2em;
   }
 
   .search-form {
     width: 100%;
+    display: flex;
+    gap: 0.5em;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 0.6em;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .search-button {
+    font-size: 1.2em;
+    padding: 0.5em;
+    border: none;
+    background: none;
+    color: #333;
+    cursor: pointer;
   }
 
   .post-item img.post-image {
     max-width: 100%;
     height: auto;
+    display: block;
   }
 
-  .search-input {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .search-button {
-    font-size: 1.4em;
+  .archive-count {
+    font-size: 0.9em;
   }
 }
 
