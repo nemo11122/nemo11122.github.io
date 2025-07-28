@@ -1,424 +1,98 @@
+/* Reset & Base */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+}
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* Header */
 .header {
-    background: #fff;
-    padding: 30px 0 10px 0;
+  background: #fff;
+  padding: 30px 0 10px 0;
 }
-
 .header-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
-
 .site-title {
   font-size: 3rem;
   font-weight: 900;
   color: #000;
-  text-decoration: none;
   letter-spacing: -1px;
   display: block;
   font-family: "Arial Black", sans-serif;
 }
-
-
-.site-title:hover {
-    color: #0073aa;
-}
-
-/* Navigation Menu - Black Buttons */
-.nav-menu {
-    margin-bottom: 30px;
-}
-
 .nav-buttons {
-    display: flex;
-    gap: 2px;
-    flex-wrap: wrap;
-}
-
-.nav-button {
-    background: #333;
-    color: white;
-    text-decoration: none;
-    padding: 6px 12px;
-    font-size: 0.75em;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    transition: background-color 0.3s ease;
-}
-
-.nav-button:hover {
-    background: #555;
-}
-
-/* Main Container */
-.main-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 40px;
-}
-
-/* Posts Area */
-.posts-area {
-    background: #fff;
-    max-width: 800px;
-}
-
-.post-item {
-    margin-bottom: 60px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid #ddd;
-}
-.post-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.post-image {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 4px;
-}
-
-.post-date {
-    font-size: 0.85em;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-    font-weight: 500;
-}
-
-.post-title {
-    font-size: 2.2em;
-    font-weight: 700;
-    margin-bottom: 25px;
-    line-height: 1.2;
-}
-
-.post-title a {
-    color: #333;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.post-title a:hover {
-    color: #0073aa;
-}
-
-.post-excerpt {
-    font-size: 1.1em;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.post-excerpt .highlight {
-    font-weight: 600;
-    color: #333;
-}
-
-.read-more {
-    color: #0073aa;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1em;
-}
-
-.read-more:hover {
-    text-decoration: underline;
-}
-
-.post-meta-footer {
-    font-size: 0.85em;
-    color: #999;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-}
-
-.post-meta-footer a {
-    color: #0073aa;
-    text-decoration: none;
-}
-
-.post-meta-footer a:hover {
-    text-decoration: underline;
-}
-/* Sidebar */
-.sidebar {
-    background: #fff;
-    width: 300px;
-    flex-shrink: 0;
-}
-
-/* Search Box */
-.search-widget {
-    margin-bottom: 40px;
-}
-
-.search-form {
-    position: relative;
-}
-
-.search-input {
-    width: 100%;
-    padding: 12px 40px 12px 15px;
-    border: 1px solid #ddd;
-    font-size: 1em;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-.search-input:focus {
-    border-color: #0073aa;
-}
-
-.search-button {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    font-size: 1.1em;
-    color: #666;
-    cursor: pointer;
-}
-
-/* Sidebar Sections */
-.sidebar-section {
-    margin-bottom: 50px;
-}
-
-.section-title {
-    font-size: 1.1em;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* About Section */
-.about-link {
-    color: #0073aa;
-    text-decoration: none;
-    font-size: 1em;
-}
-
-.about-link:hover {
-    text-decoration: underline;
-}
-
-/* Categories Section */
-.categories-list {
-    list-style: none;
-}
-
-.categories-list li {
-    margin-bottom: 8px;
-}
-
-.categories-list a {
-    color: #0073aa;
-    text-decoration: none;
-    font-size: 1em;
-    transition: color 0.3s ease;
-}
-
-.categories-list a:hover {
-    text-decoration: underline;
-    color: #005a87;
-}
-/* Email Subscribe Section */
-.email-section {
-    margin-bottom: 40px;
-}
-
-.email-description {
-    font-size: 1em;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.subscribe-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.subscribe-input {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    font-size: 1em;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-.subscribe-input:focus {
-    border-color: #0073aa;
-}
-
-.subscribe-button {
-    background: #555;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 1em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.subscribe-button:hover {
-    background: #333;
-}
-
-/* Latest Development Section */
-.development-section {
-    background: #f8f9fa;
-    padding: 20px;
-    border: 1px solid #e1e1e1;
-}
-
-.development-title {
-    font-size: 1em;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.development-image {
-    width: 100%;
-    height: auto;
-    border: 1px solid #ddd;
-}
-
-/* Footer */
-.footer {
-    background: #f8f9fa;
-    border-top: 1px solid #e1e1e1;
-    padding: 40px 0;
-    margin-top: 80px;
-    text-align: center;
-    color: #666;
-}
-
-/* About Page Modal/Overlay */
-.about-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    z-index: 1000;
-    padding: 40px 20px;
-    overflow-y: auto;
-}
-
-.about-content {
-    max-width: 800px;
-    margin: 0 auto;
-    background: white;
-    padding: 40px;
-    border-radius: 8px;
-    position: relative;
-}
-
-.close-button {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 2em;
-    cursor: pointer;
-    color: #666;
-}
-
-.close-button:hover {
-    color: #333;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .main-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .site-title {
-        font-size: 3em;
-    }
-
-    .nav-buttons {
-        justify-content: center;
-    }
-
-    .post-title {
-        font-size: 1.8em;
-    }
-
-    .about-content {
-        padding: 20px;
-    }
-    .header-search {
-  float: right;
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
   margin-top: 10px;
 }
-
-#header-search-input {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+.nav-button {
+  background: #333;
+  color: white;
+  padding: 6px 12px;
+  font-size: 0.75em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
-/* 👉 sidebar 和中間的搜尋欄統一樣式 */
+/* Layout */
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.posts-area {
+  max-width: 800px;
+}
+.sidebar {
+  width: 100%;
+}
+.sidebar-section {
+  margin-bottom: 40px;
+}
+.section-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+/* Search Inputs */
 .search-input {
   width: 100%;
   padding: 10px 12px;
   font-size: 1em;
   border: 1px solid #aaa;
   border-radius: 6px;
-  box-shadow: none;
   font-family: sans-serif;
 }
 
-/* 👉 搜尋結果區塊的標題與 mark */
+/* Search Result Area */
+#search-result-section {
+  margin-top: 40px;
+}
 #search-result-section h2 {
   font-size: 1.6em;
   font-weight: bold;
   margin-bottom: 15px;
-  margin-top: 30px;
   font-family: sans-serif;
 }
-
 #search-result-title mark {
   background: #fff;
   color: #000;
@@ -427,48 +101,67 @@ body {
   font-family: monospace;
 }
 
-/* 👉 統一搜尋結果文章排版（左欄主內容） */
-#search-results .post-item {
+/* Post Card */
+.post-item {
   margin-bottom: 60px;
   padding-bottom: 30px;
   border-bottom: 1px solid #ddd;
 }
-
-#search-results .post-title {
-  font-size: 1.7em;
-  font-weight: bold;
-  margin-bottom: 10px;
+.post-image {
+  max-width: 100%;
+  margin-bottom: 20px;
+  border-radius: 4px;
 }
-
-#search-results .post-title a {
-  color: #000;
-  text-decoration: none;
-}
-
-#search-results .post-date {
+.post-date {
   font-size: 0.85em;
   color: #666;
   text-transform: uppercase;
   margin-bottom: 6px;
 }
-
-#search-results .post-excerpt {
+.post-title {
+  font-size: 1.7em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.post-title a {
+  color: #000;
+}
+.post-excerpt {
   font-size: 1.05em;
   color: #444;
   line-height: 1.6;
 }
+.read-more {
+  color: #0073aa;
+  text-decoration: none;
+  font-weight: 600;
+}
 
-/* 👉 沒有結果時樣式 */
+/* Post Footer */
+.post-meta-footer {
+  font-size: 0.85em;
+  color: #999;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+.post-meta-footer a {
+  color: #0073aa;
+  text-decoration: none;
+}
+.post-meta-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Search - Nothing Found */
 .search-not-found {
   margin-top: 30px;
 }
-
 .search-not-found h2 {
   font-size: 2em;
   font-weight: bold;
   margin-bottom: 10px;
 }
-
 .search-not-found p {
   font-size: 1.05em;
   color: #555;
@@ -476,5 +169,12 @@ body {
   line-height: 1.6;
 }
 
-
+/* Footer */
+.footer {
+  background: #f8f9fa;
+  border-top: 1px solid #e1e1e1;
+  padding: 40px 0;
+  margin-top: 80px;
+  text-align: center;
+  color: #666;
 }
