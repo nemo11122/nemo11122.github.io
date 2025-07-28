@@ -234,4 +234,27 @@ a {
 .about-link {
   font-size: 0.95em;
 }
+/* 🧭 Header 與主內容中間分隔線與空間 */
+.header-separator {
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+/* 📰 主內容中圖片與第一行之間留空（搜尋/首頁文章） */
+.posts-area,
+#search-result-section {
+  padding-top: 10px;
+}
+
+/* 🔳 首張圖片與 header 線條之間空間 */
+.posts-area .post-item:first-child .post-image,
+#search-results .post-item:first-child .post-image {
+  margin-top: 10px;
+}
+
+/* 📐 Sidebar 與上方空間 */
+.sidebar {
+  padding-top: 10px;
+}
 
