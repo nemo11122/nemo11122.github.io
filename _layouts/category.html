@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<h1>Category: {{ page.title }}</h1>
+
+<ul>
+  {% assign this_category = page.category %}
+  {% for post in site.categories[this_category] %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      <span style="color:#999;">({{ post.date | date: "%Y-%m-%d" }})</span>
+    </li>
+  {% endfor %}
+</ul>
