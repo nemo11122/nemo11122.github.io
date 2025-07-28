@@ -9,6 +9,7 @@ body {
   line-height: 1.6;
   color: #333;
   background-color: #fff;
+  padding: 0 20px; /* 增加 body 的左右 padding */
 }
 a {
   text-decoration: none;
@@ -21,7 +22,7 @@ a {
   padding: 30px 0 10px 0;
 }
 .header-container {
-  max-width: 1400px;
+  max-width: 900px; /* 從 1400px 縮小到 900px */
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -52,14 +53,14 @@ a {
 /* Layout */
 .main-container {
   display: grid;
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: 1fr 280px; /* sidebar 稍微縮小 */
   gap: 40px;
-  max-width: 1400px;
+  max-width: 900px; /* 從 1400px 大幅縮小到 900px */
   margin: 0 auto;
   padding: 0 20px;
 }
 .posts-area {
-  max-width: 800px;
+  max-width: 600px; /* 從 800px 縮小到 600px，更符合最佳閱讀寬度 */
 }
 .sidebar {
   width: 100%;
@@ -183,14 +184,11 @@ a {
 }
 
 /* 🧭 搜尋區：標題樣式 + 底線 */
-
 #search-result-title {
   font-size: 1.6em;
   font-weight: 500;
   margin-bottom: 20px;
 }
-
-
 
 /* 搜尋欄與第一張圖片之間加距離 */
 #main-search-input {
@@ -237,6 +235,7 @@ a {
 .about-link {
   font-size: 0.95em;
 }
+
 /* 🧭 Header 與主內容中間分隔線與空間 */
 .header-separator {
   border-top: 1px solid #ccc;
@@ -264,25 +263,20 @@ a {
 /* --- 統一 sidebar 清單樣式：文字齊、點點略突出 --- */
 .sidebar-section ul {
   list-style: disc;
-  list-style-position: outside;    /* 點點在左邊獨立 */
+  list-style-position: outside;
   margin: 0;
-              /* 控制點點與標題齊 */
 }
 
 .sidebar-section ul li {
   margin: 0 0 0.4em 0;
   padding-left: 0;
-  color: #999;                     /* 點點為灰色 */
+  color: #999;
 }
 
 .sidebar-section ul li a {
-  color: #007acc;                  /* 藍色連結 */
+  color: #007acc;
   text-decoration: underline;
 }
-
-
-
-
 
 /* 🔹 讓 (1) 顯示為灰色、字體小一點 */
 .archive-count {
@@ -295,19 +289,25 @@ a {
 @media screen and (max-width: 768px) {
   body {
     font-size: 16px;
-    padding: 1em;
+    padding: 15px; /* 手機版縮小 padding */
+  }
+
+  .header-container {
+    padding: 0 15px;
   }
 
   .main-container {
     display: flex;
-    flex-direction: column; /* 👉 sidebar 改往下排 */
+    flex-direction: column;
     gap: 1.5em;
+    padding: 0 15px;
   }
 
   .posts-area,
   .sidebar-section {
     width: 100%;
     padding: 0;
+    max-width: none; /* 手機版移除最大寬度限制 */
   }
 
   .sidebar-section h3 {
@@ -349,7 +349,6 @@ a {
     font-size: 0.9em;
   }
 }
-
 
 
 
