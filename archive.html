@@ -1,0 +1,23 @@
+---
+layout: default
+title: Archives
+permalink: /archive/
+---
+
+<h1>Monthly Archives</h1>
+
+{% assign posts_by_month = site.posts | group_by_exp: "post", "post.date | date: '%B, %Y'" %}
+
+{% for month in posts_by_month %}
+  <div class="archive-month">
+    <h2 id="{{ month.name | slugify }}">{{ month.name }}</h2>
+    <ul class="archive-post-list">
+      {% for post in month.items %}
+        <li class="archive-post-item" style="display: flex; justify-content: space-between; padding: 5px 0;">
+          <a href="{{ post.url }}">{{ post.title }}</a>
+          <span style="color: #888;">{{ post.date | date: "%B %d, %Y" }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endfor %}
