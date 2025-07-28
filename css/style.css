@@ -387,4 +387,38 @@ body {
     .about-content {
         padding: 20px;
     }
+    .header-search {
+  float: right;
+  margin-top: 10px;
+}
+
+#header-search-input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+#main-search-input {
+  padding: 10px 12px;
+  border: 1px solid #999;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 500px;
+  font-size: 16px;
+}
+
+.search-not-found h2 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.search-not-found p {
+  font-size: 1.05em;
+  color: #555;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
 }
