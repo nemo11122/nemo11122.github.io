@@ -12,12 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let data = [];
 
-  // 讀取 search.json
+  // 載入 search.json
   fetch("/search.json")
     .then(res => res.json())
     .then(json => { data = json; });
 
-  // 共用搜尋函式
   function performSearch(keyword) {
     const q = keyword.trim().toLowerCase();
     if (!q) return;
@@ -68,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ⌨️ Sidebar Enter 搜尋
+  // 🔍 sidebar 輸入後按 Enter
   sidebarInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -76,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // ⌨️ 中間輸入框也能 Enter 搜尋
+  // 🔍 main 搜尋輸入後再 Enter
   mainInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -85,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+
 
 
 
